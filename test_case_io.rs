@@ -3,35 +3,32 @@
 #![allow(unused_variables)]
 #![allow(unused_imports)]
 #![allow(unused_mut)]
-
-
 use std::io;
-use std::collections::HashMap;
 
-fn cin()->i64{
-  let mut inputValue = String::new();
-  io::stdin().read_line(&mut inputValue).expect("Enter something");
-  return inputValue.trim().parse().unwrap();
+fn cin()->i32{
+  let mut input = String::new();
+  io::stdin().read_line(&mut input).ok().unwrap();
+  input.trim().parse().ok().unwrap()
 }
-fn getline()->Vec<i64>{
 
-  let mut inputValue = String::new();
-  io::stdin().read_line(&mut inputValue).ok().expect("Reading Error");
-
-  inputValue.split_whitespace()
-    .map(|s| s.parse().expect("Parsing Error")).collect()
+fn getline()->Vec<i32>{
+  let mut input = String::new();
+  io::stdin().read_line(&mut input).ok().unwrap();
+  input.split_whitespace().map(|x| x.trim().parse().ok().unwrap()).collect()
+}
+fn long_cin()->i64{
+  let mut input = String::new();
+  io::stdin().read_line(&mut input).ok().unwrap();
+  input.trim().parse().ok().unwrap()
+}
+fn long_getline()->Vec<i64>{
+  let mut input = String::new();
+  io::stdin().read_line(&mut input).ok().unwrap();
+  input.split_whitespace().map(|x| x.parse().ok().unwrap()).collect()
 }
 
 fn main(){
 
-  let mut t = cin();
 
-  while t > 0{
-
-    let input_vec = getline();
-
-
-    t -= 1;
-  }
 
 }
