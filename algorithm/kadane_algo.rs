@@ -21,15 +21,6 @@ fn getline()->Vec<i64>{
     .map(|s| s.parse().expect("Parsing Error")).collect()
 }
 
-fn max(x: i64, y: i64)->i64{
-  if x > y{
-    return x;
-  }else{
-    return y;
-  }
-}
-
-
 fn main(){
 
   let mut t = cin();
@@ -41,8 +32,8 @@ fn main(){
     let mut local_sum = -10000000;
 
     for i in arri.iter(){
-      local_sum = max(*i, local_sum+*i);
-      global_sum = max(global_sum, local_sum);
+      local_sum = std::cmp::max(*i, local_sum+*i);
+      global_sum = std::cmp::max(global_sum, local_sum);
     }
 
     println!("{}", global_sum);
