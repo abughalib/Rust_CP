@@ -31,12 +31,13 @@ impl<R: io::BufRead> Scanner<R>{
 fn main(){
 
 	let stdin = io::stdin();
-	let mut scanner = Scanner::new(stdin.lock());
+	let mut s = Scanner::new(stdin.lock());
 
 	let mut t: usize = scanner.cin();
 
 	while t > 0{
     
+		let (mut n, mut k) = (s.cin::<usize>(), s.cin::<usize>());
     
 
 		t-=1;
