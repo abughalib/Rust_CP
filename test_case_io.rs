@@ -1,34 +1,45 @@
 #![allow(dead_code)]
-#![allow(non_snake_case)]
-#![allow(unused_variables)]
 #![allow(unused_imports)]
-#![allow(unused_mut)]
+
 use std::io;
+use std::str;
+use std::cmp::{max, min};
 
-fn cin()->i32{
-  let mut input = String::new();
-  io::stdin().read_line(&mut input).ok().unwrap();
-  input.trim().parse().ok().unwrap()
+struct Scanner<R>{
+	reader: R,
+	buffer: Vec<String>
 }
-
-fn getline()->Vec<i32>{
-  let mut input = String::new();
-  io::stdin().read_line(&mut input).ok().unwrap();
-  input.split_whitespace().map(|x| x.trim().parse().ok().unwrap()).collect()
-}
-fn long_cin()->i64{
-  let mut input = String::new();
-  io::stdin().read_line(&mut input).ok().unwrap();
-  input.trim().parse().ok().unwrap()
-}
-fn long_getline()->Vec<i64>{
-  let mut input = String::new();
-  io::stdin().read_line(&mut input).ok().unwrap();
-  input.split_whitespace().map(|x| x.parse().ok().unwrap()).collect()
+impl<R: io::BufRead> Scanner<R>{
+	fn new(reader: R)->Scanner<R>{
+		Scanner{
+			reader: reader,
+			buffer: vec![]
+		}
+	}
+	fn cin<T: str::FromStr>(&mut self)->T{
+		loop{
+			if let Some(token) = self.buffer.pop(){
+				return token.parse().ok().expect("Failed to Parse!");
+			}
+			let mut input: String = String::new();
+			self.reader.read_line(&mut input).ok().expect("Failed to Read!");
+			self.buffer = input.split_whitespace().rev().map(String::from).collect();
+		}
+	}
 }
 
 fn main(){
 
+	let stdin = io::stdin();
+	let mut scanner = Scanner::new(stdin.lock());
 
+	let mut t: usize = scanner.cin();
+
+	while t > 0{
+    
+    
+
+		t-=1;
+	}
 
 }
