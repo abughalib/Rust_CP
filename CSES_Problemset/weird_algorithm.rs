@@ -1,10 +1,10 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
-
+ 
 use std::io;
 use std::str;
 use std::cmp::{max, min};
-
+ 
 struct Scanner<R>{
 	reader: R,
 	buffer: Vec<String>
@@ -27,34 +27,23 @@ impl<R: io::BufRead> Scanner<R>{
 		}
 	}
 }
-
+ 
 fn main(){
-
-  let stdin = io::stdin();
-  let mut s = Scanner::new(stdin.lock());
-
-  let mut t: usize = s.cin();
-
-  while t > 0{
-
-    let n: usize = s.cin();
-
-    let mut arri: Vec<i32> = Vec::with_capacity(n);
-    for _ in 0..n{
-      arri.push(s.cin::<i32>());
-    }
-    
-    let mut global_sum = -10000000;
-    let mut local_sum = -10000000;
-
-    for i in arri.iter(){
-      local_sum = std::cmp::max(*i, local_sum+*i);
-      global_sum = std::cmp::max(global_sum, local_sum);
-    }
-
-    println!("{}", global_sum);
-
-    t -= 1;
-  }
-
+ 
+	let stdin = io::stdin();
+	let mut scanner = Scanner::new(stdin.lock());
+ 
+	let mut n: usize = scanner.cin();
+ 
+	while n != 1{
+		if n^1 != n+1{
+			print!("{} ", n);
+			n *= 3;
+			n+=1;
+			continue;
+		}
+		print!("{} ", n);
+		n = n/2;
+	}
+	print!("{}", 1);
 }

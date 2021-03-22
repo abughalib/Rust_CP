@@ -1,10 +1,10 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
-
-use std::io;
+ 
+use std::io::{self, Read};
 use std::str;
 use std::cmp::{max, min};
-
+ 
 struct Scanner<R>{
 	reader: R,
 	buffer: Vec<String>
@@ -27,34 +27,31 @@ impl<R: io::BufRead> Scanner<R>{
 		}
 	}
 }
-
+ 
 fn main(){
-
-  let stdin = io::stdin();
-  let mut s = Scanner::new(stdin.lock());
-
-  let mut t: usize = s.cin();
-
-  while t > 0{
-
-    let n: usize = s.cin();
-
-    let mut arri: Vec<i32> = Vec::with_capacity(n);
-    for _ in 0..n{
-      arri.push(s.cin::<i32>());
-    }
-    
-    let mut global_sum = -10000000;
-    let mut local_sum = -10000000;
-
-    for i in arri.iter(){
-      local_sum = std::cmp::max(*i, local_sum+*i);
-      global_sum = std::cmp::max(global_sum, local_sum);
-    }
-
-    println!("{}", global_sum);
-
-    t -= 1;
-  }
-
+ 
+	// let stdin = io::stdin();
+	// let mut s = Scanner::new(stdin.lock());
+ 
+	let mut seq = String::new();
+	io::stdin().read_line(&mut seq).ok().expect("Failed read!");
+	
+	let mut seq: Vec<char> = seq.chars().collect();
+ 
+	let mut global_max: usize = 0;
+	let mut local_max: usize = 0;
+ 
+	for i in 0..(seq.len()-1){
+		if seq[i] != seq[i+1]{
+			local_max+=1;
+			global_max = max(global_max, local_max);
+			local_max = 0;
+			continue;
+		}
+		local_max +=1;
+	}
+ 
+ 
+	println!("{}", global_max);
+ 
 }

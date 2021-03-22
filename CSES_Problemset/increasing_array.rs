@@ -1,10 +1,11 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
-
-use std::io;
+ 
+use std::io::{self, Read};
 use std::str;
 use std::cmp::{max, min};
-
+use std::collections::*;
+ 
 struct Scanner<R>{
 	reader: R,
 	buffer: Vec<String>
@@ -27,34 +28,28 @@ impl<R: io::BufRead> Scanner<R>{
 		}
 	}
 }
-
+ 
 fn main(){
-
-  let stdin = io::stdin();
-  let mut s = Scanner::new(stdin.lock());
-
-  let mut t: usize = s.cin();
-
-  while t > 0{
-
-    let n: usize = s.cin();
-
-    let mut arri: Vec<i32> = Vec::with_capacity(n);
-    for _ in 0..n{
-      arri.push(s.cin::<i32>());
-    }
-    
-    let mut global_sum = -10000000;
-    let mut local_sum = -10000000;
-
-    for i in arri.iter(){
-      local_sum = std::cmp::max(*i, local_sum+*i);
-      global_sum = std::cmp::max(global_sum, local_sum);
-    }
-
-    println!("{}", global_sum);
-
-    t -= 1;
-  }
-
+ 
+	let stdin = io::stdin();
+	let mut s = Scanner::new(stdin.lock());
+ 
+	let n: usize = s.cin();
+ 
+	let mut a: usize = s.cin();
+ 
+	let mut moves: usize = 0;
+ 
+	for _ in 0..(n-1){
+		let b: usize = s.cin();
+		if b < a{
+			moves += a-b;
+			a = b+(a-b);
+			continue;
+		}
+		a = b;
+	}
+	
+	println!("{}", moves);
+ 
 }
